@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drawSVG</title>
+</head>
+<body>
+    <svg  xmlns="http://www.w3.org/2000/svg" width="100%" height="500%">
+        <text  id="text" alignment-baseline="hanging" font-size="80" fill="none" stroke="black">
+            hello world!
+        </text>
+    </svg>
+    <script>
+        var text=document.querySelector("#text");
+        drawSVG(text,200,10);
+        /**
+         * 动态画出svg图形
+         * @param dom 要画出的元素
+         * @param segmentLength 画的每一段的长度
+         * @param preTime 每一次变化之间的间隔毫秒数
+         * */
+        function drawSVG(dom,segmentLength,preTime){
+            var i= 0,
+            t=setInterval(function(){
+                i++;
+                if(i==segmentLength){
+                    clearInterval(i);
+                }
+                dom.setAttribute("stroke-dasharray",i+" "+(segmentLength-i));
+            },preTime);
+            dom.setAttribute("stroke-dasharray","0");
+        }
+    </script>
+</body>
+</html>
